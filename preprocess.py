@@ -128,5 +128,5 @@ def preprocess(filename):
 
 
 if __name__ == '__main__':
-	preprocess(dataset_default)
+	preprocess(dataset_test)
 

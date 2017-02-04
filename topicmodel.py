@@ -4,17 +4,11 @@ from nltk.tokenize import TweetTokenizer
 from gensim import corpora, models
 
 
-
-
-
-
-	
 def lda_model(filename):
-
 	tknzr = TweetTokenizer()
 	texts_tokenized = []
 
-	with open(filename, 'rb') as csvfile:
+	with open(preprocessed_filename(filename), 'rb') as csvfile:
 		rows = csv_reader(csvfile)
 		line = 0
 		for row in rows:
@@ -22,16 +16,22 @@ def lda_model(filename):
 			if line == 1:
 				continue
 			texts_tokenized.append(tknzr.tokenize(row[0]))
-	
-	# print texts
 
 	dictionary = corpora.Dictionary(texts_tokenized)
 	corpus = [dictionary.doc2bow(text) for text in texts_tokenized]
 	ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=3, id2word = dictionary, passes=20)
-	print(ldamodel.print_topics(num_topics=3, num_words=3))
-	# print ldamodel
-	print(ldamodel.get_topic_terms(topicid = 0, topn=15))
-	
+	labels = []
+	for bow in corpus:
+		max_p = 0
+		max_label = 0
+		for label, p in ldamodel.get_document_topics(bow):
+			if p>max_p:
+				max_p = p
+				max_label = label
+		labels += [max_label]
+	return labels
+
+
 
 if __name__ == '__main__':
-	lda_model('test_preprocessed.csv')
+	lda_model(dataset_test)
