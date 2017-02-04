@@ -168,13 +168,14 @@ def correct_sentences(sentences):
 						max_score = _score
 						selected = candidate
 			res += [selected]
+		print res
 		ret += [' '.join(steming(removeStopwords(res)))]
 	# print ret
 	return ret
 
 
 def main():
-	correct_sentences(['i will see u tmrw.'])
+	correct_sentences(['how r u doing 2day'])
 	# print correct_word('2morow')
 	# train()
 	# print matchness('2morow','tomorrow')
