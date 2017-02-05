@@ -15,6 +15,9 @@ def csv_reader(infile):
 def preprocessed_filename(filename):
 	return filename[:-4]+'_preprocessed.csv'
 
+def lda_model_filename(filename):
+	return filename[:-4]+'_lda_model.csv'
+
 def result_filename(filename):
 	return filename[:-4]+'_result.csv'
 
