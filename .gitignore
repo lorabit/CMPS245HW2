@@ -1,4 +1,8 @@
 .DS_Store
+tmp/input/*
+tmp/output/doc_wids/*
+tmp/output/model/*
+tmp/output/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
