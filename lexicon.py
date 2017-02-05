@@ -168,7 +168,7 @@ def correct_sentences(sentences):
 						max_score = _score
 						selected = candidate
 			res += [selected]
-		print res
+		# print res
 		ret += [' '.join(steming(removeStopwords(res)))]
 	# print ret
 	return ret

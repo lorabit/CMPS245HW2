@@ -21,7 +21,7 @@ def lda_model(filename, k):
 
 	dictionary = corpora.Dictionary(texts_tokenized)
 	corpus = [dictionary.doc2bow(text) for text in texts_tokenized]
-	ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=k, id2word = dictionary, passes=20)
+	ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=k, id2word = dictionary, passes=1)
 	labels = []
 	for bow in corpus:
 		max_p = 0
@@ -31,27 +31,6 @@ def lda_model(filename, k):
 				max_p = p
 				max_label = label
 		labels += [max_label]
-
-	with open(lda_model_filename(filename), 'wb') as outfile:
-		writer = csv_writer(outfile)
-		new_rows = []
-		with open(filename, 'rb') as preprocessed_csv:
-			rows = csv_reader(preprocessed_csv)
-			line = 0
-			i = 0
-			for row in rows:
-				line += 1
-				if line == 1:
-					continue
-				new_rows += [row[0]]
-
-		label_index = 0
-		for new_row in new_rows:
-			writer.writerow([new_row, labels[label_index]])
-			label_index += 1
-
-
-
 	return labels
 
 
@@ -86,14 +65,14 @@ def btm_model(filename, K):
 
 	# learning
 	if method == "obtm":
-		n_iter=500
+		n_iter=5
 		lam=1
 		params = ['OnlineBTM/src/run','obtm',K,W,alpha,beta,dwid_dir,n_day,model_dir,n_iter,lam]
 		call([str(i) for i in params])
 		# ../src/run obtm $K $W $alpha $beta $dwid_dir $n_day $model_dir $n_iter $lam
 	else:
-		win=2000000
-		n_rej=100
+		win=200
+		n_rej=5
 		params = ['OnlineBTM/src/run','ibtm',K,W,alpha,beta,dwid_dir,n_day,model_dir,win,n_rej]
 		call([str(i) for i in params])
 		# ../src/run ibtm $K $W $alpha $beta $dwid_dir $n_day $model_dir $win $n_rej
@@ -117,6 +96,38 @@ def btm_model(filename, K):
 			ret += [max_label]
 	return ret
 
+def write_csv(filename, labels1, labels2):
+	with open(result_filename(filename), 'wb') as outfile:
+		writer = csv_writer(outfile)
+		new_rows = []
+		raw_rows = []
+		with open(filename, 'rb') as preprocessed_csv:
+			rows = csv_reader(preprocessed_csv)
+			line = 0
+			i = 0
+			for row in rows:
+				line += 1
+				if line == 1:
+					continue
+				raw_rows += [row[0]]
+
+		with open(preprocessed_filename(filename), 'rb') as preprocessed_csv:
+			rows = csv_reader(preprocessed_csv)
+			line = 0
+			i = 0
+			for row in rows:
+				line += 1
+				if line == 1:
+					continue
+				new_rows += [row[0]]
+
+		label_index = 0
+		writer.writerow(['Raw text','Preproceesed','LDA label','BTM label'])
+		for new_row in new_rows:
+			writer.writerow([raw_rows[label_index],new_row, labels1[label_index], labels2[label_index]])
+			label_index += 1
+
 if __name__ == '__main__':
-	print btm_model(dataset_test, 5)
-	print lda_model(dataset_test, 5)
+	K = 5
+	dataset = dataset_test
+	write_csv(dataset,lda_model(dataset, K),btm_model(dataset, K))
