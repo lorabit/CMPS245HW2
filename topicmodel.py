@@ -4,7 +4,7 @@ from nltk.tokenize import TweetTokenizer
 from gensim import corpora, models
 
 
-def lda_model(filename):
+def lda_model(filename, k):
 	tknzr = TweetTokenizer()
 	texts_tokenized = []
 
@@ -19,7 +19,7 @@ def lda_model(filename):
 
 	dictionary = corpora.Dictionary(texts_tokenized)
 	corpus = [dictionary.doc2bow(text) for text in texts_tokenized]
-	ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=3, id2word = dictionary, passes=20)
+	ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=k, id2word = dictionary, passes=20)
 	labels = []
 	for bow in corpus:
 		max_p = 0
@@ -32,6 +32,9 @@ def lda_model(filename):
 	return labels
 
 
+def btm_model(filename, k):
+
+	return []
 
 if __name__ == '__main__':
-	lda_model(dataset_test)
+	print lda_model(dataset_default, 4)
