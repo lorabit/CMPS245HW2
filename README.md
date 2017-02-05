@@ -1,6 +1,15 @@
 # CMPS245HW2 - Topic model on Twitter
 Yanan Xie, Ziqiang Wang
 
+## Run and test
+
+Simply run `main.py` to have the clustering results in the console. 
+
+## Submissions
+Qualitative evaluation: `Qualitative Evaluation.txt`
+
+Top 10 words in topics: `topwords.txt`
+
 ## Preprocessing and lexical normalization of tweets
 
 As the first step, we remove all @user and trailing hashtags after tokenizing with nltk. And then we apply lexicon normalization of our own implementation on the sentences. Finally, we remove stop words to form the dataset to feed the clustering algorithm. 
@@ -50,6 +59,7 @@ We noticed that in many cases, above similarity method alone will find some rare
 
 In some cases, the same error word is supposed to be corrected as 2 different words. For example, word `2` is supposed to be corrected by `to` in the sentence `I am about 2 get there` while in the sentence `I am 2 old to play this game` the same word is supposed to be replaced by `too`. Fortunately, we found CMU's Twitter POS Tagger can still produce the correct POS tags given sentence with error words in most cases. So we count the POS tag distribution for each correct word in the given dataset. An additional score is given by the product of tag frequency and confidence produced by POS Tagger. 
 
+Use **dict_gen.py** to generate the dictionary for above 2 frequency data.
 
 As the lack of training data, we simply sum the above 3 scores together as the final score to measure each candidate. We pick the candidate with the highest score as the replacement to the error word.
 

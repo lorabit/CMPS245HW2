@@ -1,0 +1,46 @@
+
+============================================
+K=3 
+LDA Topics:
+0.023*"rt" + 0.014*"god" + 0.011*"know" + 0.010*"us" + 0.009*"thank" + 0.009*"love" + 0.008*"hillari" + 0.008*"get" + 0.008*"dont" + 0.007*"one"
+0.021*"rt" + 0.015*"plan" + 0.011*"parenthood" + 0.009*"today" + 0.008*"attack" + 0.008*"support" + 0.007*"lie" + 0.007*"terror" + 0.007*"terrorist" + 0.005*"christian"
+0.024*"peopl" + 0.024*"women" + 0.022*"abort" + 0.015*"right" + 0.013*"it" + 0.013*"babi" + 0.012*"rt" + 0.011*"life" + 0.011*"kill" + 0.010*"dont"
+
+BTM Topics:
+p(z)		Top words
+0.535619	rt:0.017145 like:0.007834 dont:0.007242 get:0.006505 peopl:0.006448 im:0.006284 say:0.006191 women:0.005506 hillari:0.005324 know:0.005189
+0.310450	women:0.020214 abort:0.019204 peopl:0.017520 right:0.012482 it:0.012454 rt:0.011851 babi:0.011624 kill:0.010473 dont:0.010371 life:0.010221
+0.153931	rt:0.025701 god:0.015911 us:0.010684 life:0.009843 love:0.008361 thank:0.008251 plan:0.006490 day:0.006390 live:0.005470 good:0.005466
+
+============================================
+K=4
+LDA Topics:
+0.020*"make" + 0.015*"hillari" + 0.014*"rt" + 0.010*"like" + 0.009*"vote" + 0.007*"clinton" + 0.007*"get" + 0.006*"presid" + 0.006*"im" + 0.006*"debat"
+0.029*"rt" + 0.018*"plan" + 0.013*"parenthood" + 0.010*"attack" + 0.010*"support" + 0.009*"lie" + 0.009*"terror" + 0.009*"women" + 0.008*"terrorist" + 0.007*"pp"
+0.023*"rt" + 0.020*"god" + 0.013*"thank" + 0.013*"love" + 0.011*"us" + 0.010*"thing" + 0.010*"know" + 0.010*"day" + 0.009*"good" + 0.009*"dont"
+0.023*"women" + 0.022*"peopl" + 0.021*"abort" + 0.018*"right" + 0.015*"babi" + 0.014*"dont" + 0.013*"kill" + 0.013*"it" + 0.011*"rt" + 0.011*"life"
+
+BTM Topics:
+p(z)		Top words
+0.451816	rt:0.015064 dont:0.009461 like:0.008879 peopl:0.007520 im:0.007437 get:0.007301 know:0.006626 god:0.006231 say:0.006189 go:0.005927
+0.370544	women:0.019326 abort:0.018963 peopl:0.015339 rt:0.014244 it:0.011189 right:0.011189 babi:0.010678 kill:0.009673 would:0.008872 life:0.008279
+0.096527	rt:0.029896 hillari:0.014508 clinton:0.010694 plan:0.009677 parenthood:0.007416 ht:0.006902 attack:0.005938 today:0.005525 vote:0.005191 democrat:0.005154
+0.081114	god:0.031353 rt:0.022750 life:0.014117 us:0.013442 love:0.011602 believ:0.010505 lord:0.008962 promisedland:0.008249 vs:0.007941 live:0.007449
+
+============================================
+K=5
+LDA Topics:
+0.032*"rt" + 0.014*"god" + 0.010*"get" + 0.010*"love" + 0.008*"presid" + 0.007*"us" + 0.007*"world" + 0.007*"go" + 0.007*"come" + 0.006*"ht"
+0.025*"babi" + 0.021*"kill" + 0.020*"it" + 0.018*"rt" + 0.018*"life" + 0.016*"right" + 0.014*"abort" + 0.013*"human" + 0.012*"bodi" + 0.012*"choic"
+0.019*"dont" + 0.017*"peopl" + 0.014*"know" + 0.014*"like" + 0.013*"your" + 0.013*"women" + 0.013*"im" + 0.012*"rt" + 0.010*"think" + 0.010*"say"
+0.022*"hillari" + 0.017*"would" + 0.012*"vote" + 0.011*"good" + 0.011*"clinton" + 0.009*"forc" + 0.009*"rt" + 0.008*"pregnanc" + 0.008*"debat" + 0.008*"candid"
+0.025*"rt" + 0.021*"women" + 0.017*"plan" + 0.013*"parenthood" + 0.012*"abort" + 0.012*"thank" + 0.011*"right" + 0.009*"health" + 0.008*"terror" + 0.008*"care"
+
+BTM Topics:
+p(z)		Top words
+0.605054	women:0.013799 peopl:0.013548 rt:0.013291 abort:0.012358 it:0.009320 dont:0.009240 right:0.008593 babi:0.007652 kill:0.007262 would:0.006779
+0.204853	rt:0.017904 hillari:0.010279 like:0.009373 get:0.008319 im:0.007622 go:0.006623 clinton:0.006341 dont:0.006011 say:0.005916 time:0.005697
+0.091818	god:0.031476 rt:0.024873 us:0.013486 life:0.013386 love:0.012656 thank:0.009477 believ:0.009232 day:0.008636 good:0.008118 lord:0.008090
+0.066387	rt:0.028735 plan:0.025871 parenthood:0.021445 women:0.012531 abort:0.011261 health:0.010384 provid:0.007574 pp:0.007359 attack:0.007166 hillari:0.007159
+0.031888	rt:0.028568 promisedland:0.021082 peopl:0.010701 war:0.008990 say:0.007534 ht:0.007102 hillari:0.006030 ruthblan:0.005918 lie:0.005726 law:0.005583
+

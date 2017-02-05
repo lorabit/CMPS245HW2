@@ -4,9 +4,11 @@ from nltk.tokenize import TweetTokenizer
 from gensim import corpora, models
 import indexDocs
 from subprocess import call
+import topicDisplay
 
 
 def lda_model(filename, k):
+	print 'Computing LDA...'
 	tknzr = TweetTokenizer()
 	texts_tokenized = []
 
@@ -21,7 +23,11 @@ def lda_model(filename, k):
 
 	dictionary = corpora.Dictionary(texts_tokenized)
 	corpus = [dictionary.doc2bow(text) for text in texts_tokenized]
-	ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=k, id2word = dictionary, passes=1)
+	ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=k, id2word = dictionary, passes=20)
+	topics = ldamodel.print_topics(20)
+	print 'LDA Topics:'
+	for a,b in topics:
+		print b
 	labels = []
 	for bow in corpus:
 		max_p = 0
@@ -54,7 +60,8 @@ def btm_model(filename, K):
 			line += 1
 			if line == 1:
 				continue
-			sentences += [row[0]]
+			if len(row[0])>0:
+				sentences += [row[0]]
 	with open(input_dir+'0.txt','w') as outfile:
 		for s in sentences:
 			outfile.write(s)
@@ -65,14 +72,14 @@ def btm_model(filename, K):
 
 	# learning
 	if method == "obtm":
-		n_iter=5
+		n_iter=500
 		lam=1
 		params = ['OnlineBTM/src/run','obtm',K,W,alpha,beta,dwid_dir,n_day,model_dir,n_iter,lam]
 		call([str(i) for i in params])
 		# ../src/run obtm $K $W $alpha $beta $dwid_dir $n_day $model_dir $n_iter $lam
 	else:
-		win=200
-		n_rej=5
+		win=2000000
+		n_rej=100
 		params = ['OnlineBTM/src/run','ibtm',K,W,alpha,beta,dwid_dir,n_day,model_dir,win,n_rej]
 		call([str(i) for i in params])
 		# ../src/run ibtm $K $W $alpha $beta $dwid_dir $n_day $model_dir $win $n_rej
@@ -82,6 +89,14 @@ def btm_model(filename, K):
 	params = ['OnlineBTM/src/infer','sum_b',K,0,dwid_pt,model_dir]
 	call([str(i) for i in params])
 	# ../src/infer sum_b $K $day $dwid_pt $model_dir
+	# python topicDisplay.py $model_dir $K $day $voca_pt
+	
+	print 'BTM Topics:'
+	voca = topicDisplay.read_voca(voca_pt) 
+	pz_pt = model_dir + 'k%d.day%d.pz' % (K, 0)
+	pz = topicDisplay.read_pz(pz_pt)
+	zw_pt = model_dir + 'k%d.day%d.pw_z' %  (K, 0)
+	topicDisplay.dispTopics(zw_pt, voca, pz)
 	ret = []
 	with open(model_dir+'k'+str(K)+'.day0.pz_d', 'r') as infile:
 		for line in infile.readlines():
@@ -129,5 +144,6 @@ def write_csv(filename, labels1, labels2):
 
 if __name__ == '__main__':
 	K = 5
-	dataset = dataset_test
-	write_csv(dataset,lda_model(dataset, K),btm_model(dataset, K))
+	dataset = dataset_default
+	lda_model(dataset, K)
+	btm_model(dataset, K)

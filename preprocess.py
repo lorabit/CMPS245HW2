@@ -5,6 +5,7 @@ import enchant
 import lexicon
 
 def preprocess(filename):
+	print 'Preprocessing ...'
 	tknzr = TweetTokenizer()
 	d = enchant.Dict("en_US")
 
